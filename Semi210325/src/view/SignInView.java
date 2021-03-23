@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -14,8 +15,8 @@ public class SignInView extends JFrame {
 	JLabel			label_pw		= null;
 	JTextField		textField_id	= null;
 	JPasswordField	pwField_pw		= null;
-	JButton			jbtn_signIn		= null;
-	JButton			jbtn_signUp		= null;
+	JButton			button_signIn	= null;
+	JButton			button_signUp	= null;
 
 	public SignInView() {
 		initDisplay();
@@ -27,8 +28,8 @@ public class SignInView extends JFrame {
 		textField_id = new JTextField();
 		label_pw = new JLabel("PASSWORD");
 		pwField_pw = new JPasswordField();
-		jbtn_signIn = new JButton("Sign in");
-		jbtn_signUp = new JButton("Sign up");
+		button_signIn = new JButton("Sign in");
+		button_signUp = new JButton("Sign up");
 		this.setLayout(null);
 		// 아이디 레이블
 		label_id.setFont(font);
@@ -45,16 +46,17 @@ public class SignInView extends JFrame {
 		pwField_pw.setBounds(150, 40, 100, 20);
 		this.add(pwField_pw);
 		// 로그인 버튼
-		jbtn_signIn.setFont(font);
-		jbtn_signIn.setBounds(40, 70, 90, 30);
-		jbtn_signIn.addActionListener(null);
-		this.add(jbtn_signIn);
+		button_signIn.setFont(font);
+		button_signIn.setBounds(40, 70, 90, 30);
+//		button_signIn.addActionListener(null);
+		this.add(button_signIn);
 		// 회원가입 버튼
-		jbtn_signUp.setFont(font);
-		jbtn_signUp.setBounds(150, 70, 90, 30);
-		jbtn_signUp.addActionListener(null);
-		this.add(jbtn_signUp);
+		button_signUp.setFont(font);
+		button_signUp.setBounds(150, 70, 90, 30);
+//		button_signUp.addActionListener(null);
+		this.add(button_signUp);
 
+		this.getContentPane().setBackground(Color.ORANGE);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("SignInView");
