@@ -1,4 +1,4 @@
-package dao;
+package model;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ public class ChatDAO {
 	SqlSessionFactory factory;
 
 	private SqlSessionFactory getSqlSessionFactory() {
+
 		if (factory != null) {
 			return factory;
 		}
@@ -23,7 +24,8 @@ public class ChatDAO {
 
 		try {
 			is = Resources.getResourceAsStream("mybatis-config.xml");
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder(); // 설정파일을 읽기 위한 객체
@@ -32,8 +34,8 @@ public class ChatDAO {
 	}
 
 	public ChatVO getNicknameById(String id) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		ChatVO member = (ChatVO) sqlSession.selectOne("dao.mapper.MemberMapper.getNicknameById", id);
+		SqlSession	sqlSession	= getSqlSessionFactory().openSession();
+		ChatVO		member		= sqlSession.selectOne("model.MemberMapper.getNicknameById", id);
 
 		sqlSession.close();
 
@@ -42,15 +44,17 @@ public class ChatDAO {
 	}
 
 	public static void main(String[] args) {
-		ChatDAO dao = new ChatDAO();
-		ChatVO member = null;
-		ArrayList<ChatVO> voList = new ArrayList<ChatVO>();
+		ChatDAO				dao		= new ChatDAO();
+		ChatVO				member	= null;
+		ArrayList<ChatVO>	voList	= new ArrayList<ChatVO>();
+
 		for (int i = 1; i < 8; i++) {
 			member = dao.getNicknameById("testuser" + i);
 			voList.add(member);
 		}
+
 		for (ChatVO index : voList) {
-			System.out.println(index.getPassword());
+			System.out.println(index.getNickname());
 		}
 	}
 }
