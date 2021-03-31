@@ -35,12 +35,14 @@ public class ChatView extends JFrame {
 		textField_send = new JTextField(22);
 		button_send = new JButton("Send");
 		button_send.setFont(buttonFont);
+//		button_send.addActionListener(null);
 		panel_message.add(textField_send);
 		panel_message.add(button_send);
 		roomName = new JLabel("채팅방 이름");
 		roomName.setFont(titleFont);
 
 		chatArea = new JTextArea();
+		chatArea.setEditable(false);
 		scrollPane_chatArea = new JScrollPane(chatArea);
 		this.add("North", roomName);
 		this.add("Center", scrollPane_chatArea);
