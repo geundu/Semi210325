@@ -24,7 +24,7 @@ public class PictureMessage extends JDialog implements ActionListener {
 											pic0, pic1, pic2, pic3, pic4
 	};
 	String		imgChoice	= "default";
-	String		path		= "C:\\Java\\dev_javaB\\dev_java\\src\\image\\";
+	String		path		= "src\\";
 
 	public PictureMessage(MessageRoom mr) {
 		this.mr = mr;

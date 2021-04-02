@@ -1,40 +1,19 @@
 package model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import vo.ChatVO;
 
 public class ChatDAO {
 	SqlSessionFactory factory;
 
-	private SqlSessionFactory getSqlSessionFactory() {
-
-		if (factory != null) {
-			return factory;
-		}
-
-		InputStream is = null;
-
-		try {
-			is = Resources.getResourceAsStream("mybatis-config.xml");
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder(); // 설정파일을 읽기 위한 객체
-		factory = builder.build(is);
-		return factory;
-	}
-
 	public ChatVO getNicknameById(String id) {
-		SqlSession	sqlSession	= getSqlSessionFactory().openSession();
+		factory = MyBatisCommonFactory.getInstance();
+		SqlSession	sqlSession	= factory.openSession();
 		ChatVO		member		= sqlSession.selectOne("model.MemberMapper.getNicknameById", id);
 
 		sqlSession.close();
@@ -43,18 +22,40 @@ public class ChatDAO {
 
 	}
 
+	public Map<String, Object> loginProcedure(String id, String password, Map<String, Object> map) {
+		factory = MyBatisCommonFactory.getInstance();
+		SqlSession sqlSession = factory.openSession();
+
+		map.put("id", id);
+		map.put("password", password);
+		sqlSession.selectOne("model.MemberMapper.mapProcedureTest", map);
+
+		sqlSession.close();
+
+		return map;
+	}
+
 	public static void main(String[] args) {
-		ChatDAO				dao		= new ChatDAO();
-		ChatVO				member	= null;
-		ArrayList<ChatVO>	voList	= new ArrayList<ChatVO>();
+		ChatDAO					dao		= new ChatDAO();
+//		ChatVO				member	= null;
+//		ArrayList<ChatVO>	voList	= new ArrayList<ChatVO>();
 
-		for (int i = 1; i < 8; i++) {
-			member = dao.getNicknameById("testuser" + i);
-			voList.add(member);
-		}
+//		for (int i = 1; i < 8; i++) {
+//			member = dao.getNicknameById("testuser" + i);
+//			voList.add(member);
+//		}
+//
+//		for (ChatVO index : voList) {
+//			System.out.println(index.getNickname());
+//		}
+		Map<String, Object>	mapTest	= new HashMap<String, Object>();
+		mapTest = (HashMap<String, Object>) dao.loginProcedure("testuser1", "123", mapTest);
+		System.out.println(mapTest);
 
-		for (ChatVO index : voList) {
-			System.out.println(index.getNickname());
+		Object[] hello = mapTest.keySet().toArray();
+
+		for (Object o : hello) {
+			System.out.println(o);
 		}
 	}
 }

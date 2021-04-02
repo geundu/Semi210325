@@ -16,4 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO chat (id, nickname, password)
 		VALUES (#{id}, #{nickname}, #{password})
 	</insert>
+	<resultMap id="hashmapTest" type="hashmap" />
+	<select id="mapProcedureTest" statementType="CALLABLE" parameterType="java.util.Map">
+		{CALL proc_login(#{id}, #{password}, #{nickname, mode=OUT,
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=hashmapTest})}
+	</select>
 </mapper>
