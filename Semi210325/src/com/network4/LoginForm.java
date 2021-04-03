@@ -1,20 +1,15 @@
 package com.network4;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,10 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-
-import com.network4.DBConnectionMgr2;
 
 public class LoginForm extends JFrame implements ActionListener {
 	/////////////////////////////////////////////////////
@@ -41,8 +33,8 @@ public class LoginForm extends JFrame implements ActionListener {
 	JLabel			jlb_pw		= new JLabel("패스워드");
 
 	Font			jl_font		= new Font("휴먼매직체", Font.BOLD, 17);
-	JTextField		jtf_id		= new JTextField();
-	JPasswordField	jpf_pw		= new JPasswordField();
+	JTextField		jtf_id		= new JTextField("testuser1");
+	JPasswordField	jpf_pw		= new JPasswordField("123");
 
 	JButton			jbtn_login	= new JButton(
 								new ImageIcon(imgPath + "login.png"));
@@ -141,9 +133,17 @@ public class LoginForm extends JFrame implements ActionListener {
 			}
 
 			try {
-				String	mem_id	= jtf_id.getText();
-				String	mem_pwd	= jpf_pw.getText();
-				nickName = chatDao.login(mem_id, mem_pwd);
+				List<Map<String, Object>>	nickList	= new ArrayList<Map<String, Object>>();
+				Map<String, Object>			nickMap		= new HashMap<String, Object>();
+				String						p_id		= jtf_id.getText();
+				String						p_pw		= jpf_pw.getText();
+				nickMap = chatDao.login(p_id, p_pw, nickMap);
+
+				nickList = (List<Map<String, Object>>) nickMap.get("nickname");
+
+				nickName = nickList.get(0).get("NICKNAME").toString();
+
+//				nickName = chatDao.login(mem_id, mem_pwd, nickMap);
 
 				if (nickName.length() == 0) {
 					JOptionPane.showMessageDialog(this, "아이디와 비밀번호를 확인하세요.", "경고", 2);

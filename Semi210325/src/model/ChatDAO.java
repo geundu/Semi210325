@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,7 +38,7 @@ public class ChatDAO {
 	}
 
 	public static void main(String[] args) {
-		ChatDAO					dao		= new ChatDAO();
+		ChatDAO				dao		= new ChatDAO();
 //		ChatVO				member	= null;
 //		ArrayList<ChatVO>	voList	= new ArrayList<ChatVO>();
 
@@ -50,12 +52,10 @@ public class ChatDAO {
 //		}
 		Map<String, Object>	mapTest	= new HashMap<String, Object>();
 		mapTest = (HashMap<String, Object>) dao.loginProcedure("testuser1", "123", mapTest);
+		List<Map<String, String>> nickList = new ArrayList<Map<String, String>>();
 		System.out.println(mapTest);
+		nickList = (ArrayList<Map<String, String>>) mapTest.get("nickname");
 
-		Object[] hello = mapTest.keySet().toArray();
-
-		for (Object o : hello) {
-			System.out.println(o);
-		}
+		System.out.println(nickList.get(0));
 	}
 }

@@ -5,20 +5,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="model.MemberMapper">
+<mapper namespace="model.ChatMapper">
 	<select id="getNicknameById" parameterType="string" resultType="member">
 		SELECT * FROM chat WHERE id = #{id}
 	</select>
+
 	<select id="getUser" resultType="member">
 		SELECT * FROM chat ORDER BY id
 	</select>
+
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO chat (id, nickname, password)
 		VALUES (#{id}, #{nickname}, #{password})
 	</insert>
-	<resultMap id="hashmapTest" type="hashmap" />
-	<select id="mapProcedureTest" statementType="CALLABLE" parameterType="java.util.Map">
+
+	<resultMap id="loginHashMap" type="hashmap" />
+	<select id="loginProcedure" statementType="CALLABLE" parameterType="java.util.Map">
 		{CALL proc_login(#{id}, #{password}, #{nickname, mode=OUT,
-		jdbcType=CURSOR, javaType=ResultSet, resultMap=hashmapTest})}
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=loginHashMap})}
 	</select>
 </mapper>

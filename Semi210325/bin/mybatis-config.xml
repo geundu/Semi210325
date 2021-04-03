@@ -22,6 +22,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="model/MemberMapper.xml" />
+		<mapper resource="model/ChatMapper.xml" />
 	</mappers>
 </configuration>

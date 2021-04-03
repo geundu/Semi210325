@@ -3,7 +3,13 @@ package com.network4;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import model.MyBatisCommonFactory;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.internal.OracleTypes;
 
@@ -14,8 +20,23 @@ public class ChatDao {
 	OracleCallableStatement	ocstmt	= null;
 	ResultSet				rs		= null;
 
+	SqlSessionFactory		factory	= null;
+
+	public Map<String, Object> login(String id, String password, Map<String, Object> map) {
+		factory = MyBatisCommonFactory.getInstance();
+		SqlSession sqlSession = factory.openSession();
+
+		map.put("id", id);
+		map.put("password", password);
+		sqlSession.selectOne("model.ChatMapper.loginProcedure", map);
+
+		sqlSession.close();
+
+		return map;
+	}
+
 	public ChatDao() {
-		// TODO Auto-generated constructor stub
+		System.out.println("Default Constructor called.");
 	}
 
 	public String login(String id, String password) {

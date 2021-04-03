@@ -11,19 +11,15 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class DBConnectionMgr2 {
-	Connection					con		= null;
-	PreparedStatement			pstmt	= null;
-	ResultSet					rs		= null;
-	public static final String	_DRIVER	= "oracle.jdbc.driver.OracleDriver";
-	public static final String	url		= "jdbc:oracle:thin:@127.0.0.1:1521:orcl11";
-	public static final String	user	= "GEUNDU";
-	public static final String	pw		= "tiger";
+	Connection			con		= null;
+	PreparedStatement	pstmt	= null;
+	ResultSet			rs		= null;
 
 	public Connection getConnection() {
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection(url, user, pw);
+			Class.forName(OracleAccount.CHAT_DRIVER);
+			con = DriverManager.getConnection(OracleAccount.CHAT_URL, OracleAccount.CHAT_USER, OracleAccount.CHAT_PW);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
