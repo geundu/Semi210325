@@ -6,12 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="model.ChatMapper">
-	<select id="getNicknameById" parameterType="string" resultType="member">
-		SELECT * FROM chat WHERE id = #{id}
-	</select>
-
-	<select id="getUser" resultType="member">
-		SELECT * FROM chat ORDER BY id
+	<select id="getUserInfo" parameterType="java.util.String" resultType="member">
+		select id, password, nickname from chat where id=#{id} and password = #{password}
 	</select>
 
 	<insert id="insertMember" parameterType="member">

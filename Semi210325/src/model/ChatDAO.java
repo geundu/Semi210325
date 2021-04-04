@@ -30,7 +30,7 @@ public class ChatDAO {
 
 		map.put("id", id);
 		map.put("password", password);
-		sqlSession.selectOne("model.MemberMapper.mapProcedureTest", map);
+		sqlSession.selectOne("model.ChatMapper.loginProcedure", map);
 
 		sqlSession.close();
 
