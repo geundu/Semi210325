@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.ChatMapper">
+	<select id="getUserInfo" parameterType="java.util.String" resultType="member">
+		select id, password, nickname from chat where id=#{id} and password = #{password}
+	</select>
+
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO chat (id, nickname, password)
+		VALUES (#{id}, #{nickname}, #{password})
+	</insert>
+
+	<resultMap id="loginHashMap" type="hashmap" />
+	<select id="loginProcedure" statementType="CALLABLE" parameterType="java.util.Map">
+		{CALL proc_login(#{id}, #{password}, #{nickname, mode=OUT,
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=loginHashMap})}
+	</select>
+</mapper>
