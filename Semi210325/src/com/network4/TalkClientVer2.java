@@ -12,7 +12,7 @@ import javax.swing.JTabbedPane;
 
 public class TalkClientVer2 extends JFrame {
 	LoginForm			loginForm	= null;
-	JTabbedPane			tp			= new JTabbedPane();
+	JTabbedPane			tp			= new JTabbedPane(JTabbedPane.LEFT);
 	MessageRoom			mr			= new MessageRoom(this);
 	WaitRoom			wr			= new WaitRoom(this);
 	Socket				mySocket	= null;

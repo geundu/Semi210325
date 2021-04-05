@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 	<properties resource="connection.properties" />
-	<typeAliases>
+	<!-- <typeAliases>
 		<typeAlias alias="member" type="vo.ChatVO" />
-	</typeAliases>
+	</typeAliases> -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -22,6 +22,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="model/ChatMapper.xml" />
+		<mapper resource="model/MessengerMapper.xml" />
 	</mappers>
 </configuration>

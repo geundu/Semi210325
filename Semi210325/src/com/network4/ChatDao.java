@@ -9,9 +9,9 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import model.MyBatisCommonFactory;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.internal.OracleTypes;
+import view.MyBatisCommonFactory;
 
 public class ChatDao {
 	Connection				con		= null;
@@ -28,7 +28,7 @@ public class ChatDao {
 
 		map.put("id", id);
 		map.put("password", password);
-		sqlSession.selectOne("model.ChatMapper.loginProcedure", map);
+		sqlSession.selectOne("model.MessengerMapper.loginProcedure", map);
 
 		sqlSession.close();
 

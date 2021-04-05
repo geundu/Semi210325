@@ -5,16 +5,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="model.ChatMapper">
-	<select id="getNicknameById" parameterType="string" resultType="member">
-		SELECT * FROM chat WHERE id = #{id}
+<mapper namespace="model.MessengerMapper">
+	<select id="login" parameterType="vo.MessengerVO" resultType="vo.MessengerVO">
+		SELECT nickname
+		FROM chat
+		WHERE id = #{id} AND password = #{password}
 	</select>
 
-	<select id="getUser" resultType="member">
-		SELECT * FROM chat ORDER BY id
-	</select>
-
-	<insert id="insertMember" parameterType="member">
+	<insert id="insertUser" parameterType="vo.MessengerVO">
 		INSERT INTO chat (id, nickname, password)
 		VALUES (#{id}, #{nickname}, #{password})
 	</insert>
