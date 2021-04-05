@@ -15,12 +15,9 @@ public class MessengerDAO {
 		SqlSession sqlSession = factory.openSession();
 		msgrVO = sqlSession.selectOne("model.MessengerMapper.login", msgrVO);
 
-		System.out.println(msgrVO);
-
 		sqlSession.close();
 
 		return msgrVO;
-
 	}
 
 	public Map<String, Object> loginProcedure(String id, String password, Map<String, Object> map) {

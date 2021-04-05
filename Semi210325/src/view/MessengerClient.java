@@ -20,7 +20,7 @@ public class MessengerClient extends JFrame {
 	Socket				mySocket			= null;
 	ObjectInputStream	ois					= null;
 	ObjectOutputStream	oos					= null;
-	String				ip					= "127.0.0.1";
+	String				ip					= "121.139.85.156";
 	int					port				= 9234;
 	String				nickname			= null;
 	JMenuBar			menuBar				= new JMenuBar();
@@ -40,7 +40,7 @@ public class MessengerClient extends JFrame {
 		nickname = signInView.nickname;
 
 		try {
-			jbInit();
+			initDisplay();
 			getConnection();
 		}
 		catch (Exception e) {
@@ -73,7 +73,7 @@ public class MessengerClient extends JFrame {
 		}
 	}
 
-	private void jbInit() throws Exception {
+	private void initDisplay() throws Exception {
 
 		for (int i = 0; i < myPageName.length; i++) {
 			menuItem_myPage[i] = new JMenuItem(myPageName[i]);
@@ -92,8 +92,8 @@ public class MessengerClient extends JFrame {
 		tabbedPane.setToolTipText("");
 		menuBar.add(menu_myPage);
 		menuBar.add(menu_talkRoom);
+
 		this.setJMenuBar(menuBar);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.add(tabbedPane);
 		this.setSize(400, 600);

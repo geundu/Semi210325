@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class TalkServer extends JFrame implements Runnable {
 	}
 
 	public void initDisplay() {
+		jta_log.setBackground(Color.ORANGE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 
