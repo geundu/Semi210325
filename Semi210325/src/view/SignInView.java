@@ -12,8 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.network4.TalkClientVer2;
-
+import vo.MessengerMap;
 import vo.MessengerVO;
 
 public class SignInView extends JFrame implements ActionListener {
@@ -27,12 +26,14 @@ public class SignInView extends JFrame implements ActionListener {
 	MessengerDAO	msgrDAO			= new MessengerDAO();
 	String			nickname		= "";
 	MessengerClient	msgrClient		= null;
+	MessengerMap	mm				= null;
 
 	public SignInView() {
 		initDisplay();
 	}
 
 	public void initDisplay() {
+
 		Font font = new Font("맑은 고딕", Font.PLAIN, 12);
 		label_id = new JLabel("ID");
 		textField_id = new JTextField("testuser1");
@@ -113,7 +114,7 @@ public class SignInView extends JFrame implements ActionListener {
 				}
 			}
 			catch (Exception e2) {
-
+				e2.printStackTrace();
 			}
 		}
 		else if (obj == button_signUp) {

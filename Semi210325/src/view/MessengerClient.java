@@ -15,21 +15,22 @@ import javax.swing.JTabbedPane;
 public class MessengerClient extends JFrame {
 	SignInView			signInView			= null;
 	JTabbedPane			tabbedPane			= new JTabbedPane(JTabbedPane.LEFT);
-	RoomListView		roomListView		= new RoomListView(this);
-	FriendListView		friendListView		= new FriendListView(this);
+	FriendListView		friendListView		= null;
+	RoomListView		roomListView		= null;
 	Socket				mySocket			= null;
 	ObjectInputStream	ois					= null;
 	ObjectOutputStream	oos					= null;
 	String				ip					= "121.139.85.156";
 	int					port				= 9234;
 	String				nickname			= null;
-	JMenuBar			menuBar				= new JMenuBar();
-	JMenu				menu_myPage			= new JMenu("마이페이지");
+
+	JMenuBar			menuBar				= null;
+	JMenu				menu_myPage			= null;
 	String[]			myPageName			= { "닉네임 변경", "로그아웃", "회원탈퇴" };
-	JMenuItem[]			menuItem_myPage		= new JMenuItem[myPageName.length];
-	JMenu				menu_talkRoom		= new JMenu("톡방");
+	JMenuItem[]			menuItem_myPage		= null;
+	JMenu				menu_talkRoom		= null;
 	String[]			talkRoomName		= { "오픈톡", "친구톡", "친구추가" };
-	JMenuItem[]			menuItem_talkRoom	= new JMenuItem[talkRoomName.length];
+	JMenuItem[]			menuItem_talkRoom	= null;
 
 	public MessengerClient() {
 
@@ -53,6 +54,8 @@ public class MessengerClient extends JFrame {
 
 		try {
 			mySocket = new Socket(ip, port);
+
+			// 해당 부분에서 스레드 없으면 대기타는 것 같음
 			oos = new ObjectOutputStream(mySocket.getOutputStream());
 			ois = new ObjectInputStream(mySocket.getInputStream());
 			// 톡방 정보 담기
@@ -65,8 +68,8 @@ public class MessengerClient extends JFrame {
 //			oos.writeObject(Protocol.WAIT
 //										+ Protocol.seperator + nickname
 //										+ Protocol.seperator + room.state);
-//			TalkClientThread tct = new TalkClientThread(this);
-//			tct.start();// TalkClientThread의 run호출됨.-콜백함수
+//			MessengerClientThread msgrClientThread = new MessengerClientThread(this);
+//			msgrClientThread.start();// TalkClientThread의 run호출됨.-콜백함수
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -74,6 +77,14 @@ public class MessengerClient extends JFrame {
 	}
 
 	private void initDisplay() throws Exception {
+
+		friendListView = new FriendListView(this);
+		roomListView = new RoomListView(this);
+		menuBar = new JMenuBar();
+		menu_myPage = new JMenu("마이페이지");
+		menuItem_myPage = new JMenuItem[myPageName.length];
+		menu_talkRoom = new JMenu("톡방");
+		menuItem_talkRoom = new JMenuItem[talkRoomName.length];
 
 		for (int i = 0; i < myPageName.length; i++) {
 			menuItem_myPage[i] = new JMenuItem(myPageName[i]);

@@ -1,10 +1,12 @@
 package view;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import vo.MessengerMap;
 import vo.MessengerVO;
 
 public class MessengerDAO {
