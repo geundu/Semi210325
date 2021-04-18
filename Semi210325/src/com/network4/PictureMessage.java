@@ -16,8 +16,8 @@ public class PictureMessage extends JDialog implements ActionListener {
 	Image		imag[]		= null;
 	ImageIcon	img[]		= new ImageIcon[5];
 	String		imgfile[]	= {
-											"lion11.png", "lion22.png", "lion33.png", "lion44.png",
-											"lion55.png"
+											"RYAN1.png", "RYAN2.png", "RYAN3.png", "RYAN4.png",
+											"RYAN5.png"
 	};
 
 	JButton		imgButton[]	= {
@@ -107,27 +107,27 @@ public class PictureMessage extends JDialog implements ActionListener {
 
 		// JOptionPane.showMessageDialog(mr, "obj:"+obj);
 		if (obj == pic0) {// 고추
-			imgChoice = "lion11.png";
+			imgChoice = "RYAN1.png";
 			mr.message_process("이모티콘", imgChoice);
 			// this.setVisible(false);
 		}
 		else if (obj == pic1) {// 편지
-			imgChoice = "lion22.png";
+			imgChoice = "RYAN2.png";
 			mr.message_process("이모티콘", imgChoice);
 			// this.setVisible(false);
 		}
 		else if (obj == pic2) {// 평귄
-			imgChoice = "lion33.png";
+			imgChoice = "RYAN3.png";
 			mr.message_process("이모티콘", imgChoice);
 			// this.setVisible(false);
 		}
 		else if (obj == pic3) {// 선물
-			imgChoice = "lion44.png";
+			imgChoice = "RYAN4.png";
 			mr.message_process("이모티콘", imgChoice);
 			// this.setVisible(false);
 		}
 		else if (obj == pic4) {// 커피
-			imgChoice = "lion55.png";
+			imgChoice = "RYAN5.png";
 			mr.message_process("이모티콘", imgChoice);
 			// this.setVisible(false);
 		}

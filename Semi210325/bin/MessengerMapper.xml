@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="messenger.util.MessengerMapper">
+	<resultMap type="map" id="result">
+
+	</resultMap>
+	<select id="signIn" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT id, nickname
+		FROM chat
+		WHERE id = #{id} AND password = #{password}
+	</select>
+
+	<select id="idCheck" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT id FROM chat WHERE id = #{id}
+	</select>
+
+	<select id="getBuddyList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT buddy_id_vc FROM msgr_buddy WHERE mem_id_vc = #{mem_id_vc}
+		ORDER BY mem_id_vc
+	</select>
+
+	<insert id="signUp" parameterType="java.util.Map">
+		INSERT INTO chat (id, password, nickname) values (#{id}, #{password}, #{nickname})
+	</insert>
+
+	<resultMap id="loginHashMap" type="hashmap" />
+	<select id="loginProcedure" statementType="CALLABLE" parameterType="java.util.Map">
+		{CALL proc_login(#{id}, #{password}, #{nickname, mode=OUT,
+		jdbcType=CURSOR, javaType=ResultSet, resultMap=loginHashMap})}
+	</select>
+</mapper>

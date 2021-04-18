@@ -46,10 +46,17 @@ public class TalkClientVer2 extends JFrame {
 		}
 	}
 
-//	public static void main(String[] args) {
+	public static void main(String[] args) {
 //		LoginForm		loginForm	= new LoginForm();
-//		TalkClientVer2	tc2			= new TalkClientVer2(loginForm);
-//	}
+		TalkClientVer2 tc2 = new TalkClientVer2();
+		try {
+			tc2.jbInit();
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void connect_process() {
 		// nickName = JOptionPane.showInputDialog("너의 대화명은?");
